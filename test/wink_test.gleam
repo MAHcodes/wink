@@ -10,7 +10,6 @@ pub fn draw_test() {
   "(>ᴗ•)"
   |> wink.draw
   |> birdie.snap("draw_test")
-
 }
 
 pub fn custom_config_test() {
