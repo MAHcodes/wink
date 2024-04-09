@@ -1,4 +1,4 @@
-//// (>ᴗ•) Wink your text! Make it gleam with a boxy upgrade for a polished look that shines ✧
+//// A simple Gleam box drawing library
 ////
 
 import gleam/string

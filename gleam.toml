@@ -1,7 +1,7 @@
 name = "wink"
-version = "1.0.0"
+version = "1.0.2"
 
-description = "(>ᴗ•) Wink your text! Make it gleam with a boxy upgrade for a polished look that shines ✧"
+description = "A simple Gleam box drawing library"
 licences = ["GPL-3.0"]
 repository = { type = "github", user = "MAHcodes", repo = "wink" }
 

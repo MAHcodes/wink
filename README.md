@@ -3,6 +3,8 @@
 [![Package Version](https://img.shields.io/hexpm/v/wink)](https://hex.pm/packages/wink)
 [![Hex Docs](https://img.shields.io/badge/hex-docs-ffaff3)](https://hexdocs.pm/wink/)
 
+A simple Gleam box drawing library
+
 ```sh
 gleam add wink
 ```
