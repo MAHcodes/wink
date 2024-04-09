@@ -35,7 +35,6 @@ pub type Border {
   )
 }
 
-
 /// Represents different colors for drawing boxes.
 ///
 pub type Color {
