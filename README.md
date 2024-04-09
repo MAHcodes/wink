@@ -6,12 +6,69 @@
 ```sh
 gleam add wink
 ```
+
 ```gleam
+import gleam/io
 import wink
 
 pub fn main() {
-  // TODO: An example of the project in use
+    // draws a box with the default configuration
+    "(>ᴗ•)"
+    |> wink.draw
+    |> io.println
 }
+```
+
+will output:
+
+```
+
+ ╭───────╮ 
+ │       │ 
+ │ (>ᴗ•) │ 
+ │       │ 
+ ╰───────╯ 
+
+```
+
+```gleam
+import gleam/io
+import wink.{Border, Config, Custom}
+
+pub fn main() {
+    // or you can initialize a custom-styled box with specific config
+    let box =
+      wink.init(
+        Config(
+          ..wink.default_config,
+          style: Custom(Border(
+            top_right: "◝",
+            top_left: "◜",
+            bottom_right: "◞",
+            bottom_left: "◟",
+            horizontal: "―",
+            vertical: "⸾",
+          )),
+        ),
+      )
+
+    "(>ᴗ•)"
+    |> box.draw
+    |> io.println
+}
+```
+
+wink.default_config =
+
+```gleam
+Config(
+  padding: Spacing(top: 1, right: 1, bottom: 1, left: 1),
+  margin: Spacing(top: 1, right: 1, bottom: 1, left: 1),
+  style: Round,
+  box_color: Default,
+  text_color: Default,
+  decorations: [],
+)
 ```
 
 Further documentation can be found at <https://hexdocs.pm/wink>.

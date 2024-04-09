@@ -13,7 +13,7 @@ pub fn draw_test() {
 }
 
 pub fn custom_config_test() {
-  let wink =
+  let box =
     wink.init(
       Config(
         ..wink.default_config,
@@ -29,6 +29,6 @@ pub fn custom_config_test() {
     )
 
   "(>ᴗ•)"
-  |> wink.draw
+  |> box.draw
   |> birdie.snap("custom_config_test")
 }

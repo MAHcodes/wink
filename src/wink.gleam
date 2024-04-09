@@ -1,6 +1,11 @@
+//// (>ᴗ•) Wink your text! Make it gleam with a boxy upgrade for a polished look that shines ✧
+////
+
 import gleam/string
 import gleam/list
 
+/// Represents different styles for drawing boxes.
+///
 pub type Style {
   Single
   Round
@@ -17,6 +22,8 @@ pub type Style {
   Custom(Border)
 }
 
+/// Represents the borders of a box.
+///
 pub type Border {
   Border(
     top_right: String,
@@ -28,6 +35,9 @@ pub type Border {
   )
 }
 
+
+/// Represents different colors for drawing boxes.
+///
 pub type Color {
   Black
   Red
@@ -41,6 +51,8 @@ pub type Color {
   ResetColor
 }
 
+/// Represents different decorations for text.
+///
 pub type Decoration {
   Bold
   Dim
@@ -50,10 +62,14 @@ pub type Decoration {
   ResetDecoration
 }
 
+/// Represents spacing around the content of a box.
+///
 pub type Spacing {
   Spacing(top: Int, right: Int, bottom: Int, left: Int)
 }
 
+/// Represents the configuration for drawing a box.
+///
 pub type Config {
   Config(
     style: Style,
@@ -65,10 +81,14 @@ pub type Config {
   )
 }
 
+/// Represents a box instance.
+///
 pub type Box {
   Box(draw: fn(String) -> String)
 }
 
+/// Initializes a box with the given configuration.
+///
 pub fn init(cfg: Config) -> Box {
   Box(draw: fn(msg: String) -> String { draw_box(msg, cfg) })
 }
@@ -321,15 +341,19 @@ fn apply_decorations(decorations: List(Decoration)) -> String {
   |> string.concat
 }
 
+/// Default configuration for drawing a box.
+///
 pub const default_config = Config(
   padding: Spacing(top: 1, right: 1, bottom: 1, left: 1),
   margin: Spacing(top: 1, right: 1, bottom: 1, left: 1),
   style: Round,
   box_color: Default,
   text_color: Default,
-  decorations: [Dim, Italic],
+  decorations: [],
 )
 
+/// Draws a box with the default configuration.
+///
 pub fn draw(msg: String) -> String {
   draw_box(msg, default_config)
 }
