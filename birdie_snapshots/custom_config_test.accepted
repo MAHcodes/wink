@@ -1,0 +1,12 @@
+---
+version: 1.1.1
+title: custom_config_test
+file: ./test/wink_test.gleam
+test_name: custom_config_test
+---
+[39m
+ ◜―――――――◝ 
+ ⸾       ⸾ 
+ ⸾ [39m[39m[1m[3m(>ᴗ•)[0m[39m ⸾ 
+ ⸾       ⸾ 
+ ◟―――――――◞ 

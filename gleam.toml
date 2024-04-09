@@ -1,0 +1,13 @@
+name = "wink"
+version = "1.0.0"
+
+description = "(>ᴗ•) Wink your text! Make it gleam with a boxy upgrade for a polished look that shines ✧"
+licences = ["GPL-3.0"]
+repository = { type = "github", user = "MAHcodes", repo = "wink" }
+
+[dependencies]
+gleam_stdlib = "~> 0.34 or ~> 1.0"
+
+[dev-dependencies]
+gleeunit = "~> 1.0"
+birdie = "~> 1.1"
