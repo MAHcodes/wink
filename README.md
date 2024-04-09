@@ -58,19 +58,6 @@ pub fn main() {
 }
 ```
 
-wink.default_config =
-
-```gleam
-Config(
-  padding: Spacing(top: 1, right: 1, bottom: 1, left: 1),
-  margin: Spacing(top: 1, right: 1, bottom: 1, left: 1),
-  style: Round,
-  box_color: Default,
-  text_color: Default,
-  decorations: [],
-)
-```
-
 Further documentation can be found at <https://hexdocs.pm/wink>.
 
 ## Development
