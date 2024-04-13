@@ -99,10 +99,7 @@ fn draw_top(width: Int, config: Config) -> String {
   |> append(string.repeat("\n", config.margin.top))
   |> append(string.repeat(" ", config.margin.left))
   |> append(get_style(config.style).top_left)
-  |> append(string.repeat(
-    get_style(config.style).horizontal,
-    width,
-  ))
+  |> append(string.repeat(get_style(config.style).horizontal, width))
   |> append(get_style(config.style).top_right)
   |> append(string.repeat(" ", config.margin.right))
   |> append("\n")
@@ -122,10 +119,7 @@ fn draw_row(width: Int, config: Config) -> String {
 
 fn draw_middle(msg: String, width: Int, config: Config) -> String {
   string_builder.new()
-  |> append(string.repeat(
-    draw_row(width, config),
-    config.padding.top,
-  ))
+  |> append(string.repeat(draw_row(width, config), config.padding.top))
   |> append(string.repeat(" ", config.margin.left))
   |> append(get_style(config.style).vertical)
   |> append(string.repeat(" ", config.padding.left))
@@ -147,16 +141,10 @@ fn draw_middle(msg: String, width: Int, config: Config) -> String {
 
 fn draw_bottom(width: Int, config: Config) -> String {
   string_builder.new()
-  |> append(string.repeat(
-    draw_row(width, config),
-    config.padding.bottom,
-  ))
+  |> append(string.repeat(draw_row(width, config), config.padding.bottom))
   |> append(string.repeat(" ", config.margin.left))
   |> append(get_style(config.style).bottom_left)
-  |> append(string.repeat(
-    get_style(config.style).horizontal,
-    width,
-  ))
+  |> append(string.repeat(get_style(config.style).horizontal, width))
   |> append(get_style(config.style).bottom_right)
   |> append(string.repeat(" ", config.margin.right))
   |> append(string.repeat("\n", config.margin.bottom))
