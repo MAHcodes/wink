@@ -1,8 +1,9 @@
 //// A simple Gleam box drawing library
 ////
 
-import gleam/string
 import gleam/list
+import gleam/string
+import gleam/string_builder.{append}
 
 /// Represents different styles for drawing boxes.
 ///
@@ -93,67 +94,84 @@ pub fn init(cfg: Config) -> Box {
 }
 
 fn draw_top(width: Int, config: Config) -> String {
-  get_color(config.box_color)
-  |> string.append(string.repeat("\n", config.margin.top))
-  |> string.append(string.repeat(" ", config.margin.left))
-  |> string.append(get_style(config.style).top_left)
-  |> string.append(string.repeat(get_style(config.style).horizontal, width))
-  |> string.append(get_style(config.style).top_right)
-  |> string.append(string.repeat(" ", config.margin.right))
-  |> string.append("\n")
+  string_builder.new()
+  |> append(get_color(config.box_color))
+  |> append(string.repeat("\n", config.margin.top))
+  |> append(string.repeat(" ", config.margin.left))
+  |> append(get_style(config.style).top_left)
+  |> append(string.repeat(
+    get_style(config.style).horizontal,
+    width,
+  ))
+  |> append(get_style(config.style).top_right)
+  |> append(string.repeat(" ", config.margin.right))
+  |> append("\n")
+  |> string_builder.to_string
 }
 
 fn draw_row(width: Int, config: Config) -> String {
-  " "
-  |> string.repeat(config.margin.left)
-  |> string.append(get_style(config.style).vertical)
-  |> string.append(string.repeat(" ", width))
-  |> string.append(get_style(config.style).vertical)
-  |> string.append(string.repeat(" ", config.margin.right))
-  |> string.append("\n")
+  string_builder.new()
+  |> append(string.repeat(" ", config.margin.left))
+  |> append(get_style(config.style).vertical)
+  |> append(string.repeat(" ", width))
+  |> append(get_style(config.style).vertical)
+  |> append(string.repeat(" ", config.margin.right))
+  |> append("\n")
+  |> string_builder.to_string
 }
 
 fn draw_middle(msg: String, width: Int, config: Config) -> String {
-  draw_row(width, config)
-  |> string.repeat(config.padding.top)
-  |> string.append(string.repeat(" ", config.margin.left))
-  |> string.append(get_style(config.style).vertical)
-  |> string.append(string.repeat(" ", config.padding.left))
-  |> string.append(get_color(config.text_color))
-  |> string.append(
+  string_builder.new()
+  |> append(string.repeat(
+    draw_row(width, config),
+    config.padding.top,
+  ))
+  |> append(string.repeat(" ", config.margin.left))
+  |> append(get_style(config.style).vertical)
+  |> append(string.repeat(" ", config.padding.left))
+  |> append(get_color(config.text_color))
+  |> append(
     apply_ansis(msg, [
       get_color(config.text_color),
       apply_decorations(config.decorations),
     ]),
   )
-  |> string.append(get_decoration(ResetDecoration))
-  |> string.append(get_color(config.box_color))
-  |> string.append(string.repeat(" ", config.padding.right))
-  |> string.append(get_style(config.style).vertical)
-  |> string.append(string.repeat(" ", config.margin.right))
-  |> string.append("\n")
+  |> append(get_decoration(ResetDecoration))
+  |> append(get_color(config.box_color))
+  |> append(string.repeat(" ", config.padding.right))
+  |> append(get_style(config.style).vertical)
+  |> append(string.repeat(" ", config.margin.right))
+  |> append("\n")
+  |> string_builder.to_string
 }
 
 fn draw_bottom(width: Int, config: Config) -> String {
-  draw_row(width, config)
-  |> string.repeat(config.padding.bottom)
-  |> string.append(string.repeat(" ", config.margin.left))
-  |> string.append(get_style(config.style).bottom_left)
-  |> string.append(string.repeat(get_style(config.style).horizontal, width))
-  |> string.append(get_style(config.style).bottom_right)
-  |> string.append(string.repeat(" ", config.margin.right))
-  |> string.append(string.repeat("\n", config.margin.bottom))
+  string_builder.new()
+  |> append(string.repeat(
+    draw_row(width, config),
+    config.padding.bottom,
+  ))
+  |> append(string.repeat(" ", config.margin.left))
+  |> append(get_style(config.style).bottom_left)
+  |> append(string.repeat(
+    get_style(config.style).horizontal,
+    width,
+  ))
+  |> append(get_style(config.style).bottom_right)
+  |> append(string.repeat(" ", config.margin.right))
+  |> append(string.repeat("\n", config.margin.bottom))
+  |> string_builder.to_string
 }
 
 fn draw_box(msg: String, config: Config) -> String {
   let length = string.length(msg)
   let width = config.padding.left + length + config.padding.right
 
-  string.concat([
-    draw_top(width, config),
-    draw_middle(msg, width, config),
-    draw_bottom(width, config),
-  ])
+  string_builder.new()
+  |> append(draw_top(width, config))
+  |> append(draw_middle(msg, width, config))
+  |> append(draw_bottom(width, config))
+  |> string_builder.to_string
 }
 
 fn apply_ansis(text: String, ansis: List(String)) -> String {
